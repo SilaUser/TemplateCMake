@@ -1,21 +1,34 @@
-cmake_minimum_required (VERSION 2.6)
-project (TestCMake)
+cmake_minimum_required (VERSION 3.2)
 
-set(CMAKE_CXX_COMPILER "clang++")
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-add_definitions (-std=c++14 -Wall -Wextra)
+project (TestCMake)
 
 file (GLOB_RECURSE SRC "src/*.cpp")
 file (GLOB_RECURSE INC "inc/*.h")
-
 include_directories ("inc")
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "../bin")
 
-# Only for Vim YouCompleteMe Plugin necessary
-add_custom_target(VimYouCompleteMeDB COMMAND cp *.json ..)
+if (MSVC)
+  add_compile_options(/W4)
+else()
+  include(CTest)
+  enable_testing()
+  set(CMAKE_CXX_COMPILER "g++")
+  add_compile_options (-Wall -Wextra -Wpedantic)
+  add_subdirectory(test)
+endif()
 
-# Reformats the source code in ./inc and ./src
-add_custom_target(ClangFormat ALL COMMAND clang-format -style=file -i ${SRC} ${INC})
+if (CMAKE_COMPILER_IS_GNUCC)
+  option(ENABLE_COVERAGE "Enable coverage reporting for gcc/clang" FALSE)
+
+  if (ENABLE_COVERAGE)
+    add_compile_options(--coverage -O0)
+  endif()
+endif()
+
+set(CMAKE_BUILD_TYPE Debug)
+
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(${PROJECT_NAME} ${SRC})
+target_link_libraries(${PROJECT_NAME} --coverage)
 

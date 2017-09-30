@@ -1,0 +1,31 @@
+dist: trusty
+sudo: false
+language: cpp
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-6
+      - clang-format-3.5
+      - gcc-6
+      - cmake
+
+install:
+# install GTest and GMock
+- sudo apt-get -qq install libgtest-dev
+- "cd /usr/src/gtest && sudo cmake . && sudo cmake --build . && sudo mv libg* /usr/local/lib/ ; cd -"
+- sudo apt-get -qq install google-mock
+- "cd /usr/src/gmock && sudo cmake . && sudo cmake --build . && sudo mv libg* /usr/local/lib/ ; cd -"
+
+script:
+  - sudo ln -s /usr/bin/gcc-6 /usr/local/bin/gcc
+  - sudo ln -s /usr/bin/g++-6 /usr/local/bin/g++
+  - gcc -v && g++ -v && cmake --version
+  - export CC=/usr/bin/gcc-6
+  - export CXX=/usr/bin/g++-6
+  - cmake -D ENABLE_COVERAGE:BOOL=TRUE .
+  - make -j2 VERBOSE=1
+  - make test
+  - bash <(curl -s https://codecov.io/bash) -x /usr/bin/gcov-6

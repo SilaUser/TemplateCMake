@@ -1,3 +1,5 @@
+int add(int a, int b);
+
 class Test
 {
     int a;
