@@ -1,0 +1,11 @@
+build
+!build/.gitkeep
+bin
+!bin/.gitkeep
+*.swp
+*.config
+*.creator
+*.files
+*.includes
+*.creator.user
+
