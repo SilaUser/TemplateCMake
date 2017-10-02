@@ -37,5 +37,6 @@ target_link_libraries(tests ${CMAKE_THREAD_LIBS_INIT})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../inc/)
 target_link_libraries(tests --coverage)
+target_link_libraries(tests testmath)
 add_test(AllTests tests)
 

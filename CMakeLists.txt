@@ -10,6 +10,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 include_directories ("inc")
 
 add_subdirectory(inc)
+add_subdirectory(lib)
 add_subdirectory(src)
 
 if (MSVC)
@@ -27,5 +28,4 @@ if (CMAKE_COMPILER_IS_GNUCC)
     add_compile_options(--coverage -O0)
   endif()
 endif()
-
 
