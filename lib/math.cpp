@@ -1,4 +1,4 @@
-#include "math.h"
+#include "testmath.h"
 #include <iostream>
 
 int Or (int a, int b) { return a | b; }
