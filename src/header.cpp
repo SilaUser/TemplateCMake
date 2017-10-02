@@ -5,22 +5,22 @@ int add(int a, int b)
   return a+b;
 }
 
-int Test::getA()
+int TestClass::getA()
 {
     return a;
 }
 
-double Test::getB()
+double TestClass::getB()
 {
     return b;
 }
 
-void Test::setA(int val)
+void TestClass::setA(int val)
 {
     a = val;
 }
 
-void Test::setB(double val)
+void TestClass::setB(double val)
 {
     b = val;
 }

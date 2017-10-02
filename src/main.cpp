@@ -13,13 +13,12 @@ auto main () -> int
     }
 
     for (auto &n : a)
-
     {
         std::cout << n;
     }
     std::cout << "\n";
 
-    Test g;
+	TestClass g;
     std::cout << g.getA () << "\n";
     std::cout << g.getB () << "\n";
 }

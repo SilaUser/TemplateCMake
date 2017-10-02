@@ -1,12 +1,12 @@
 int add(int a, int b);
 
-class Test
+class TestClass
 {
     int a;
     double b;
 
   public:
-    Test () : a{1}, b{2} {}
+	TestClass () : a{1}, b{2} {}
 
     int getA ();
     double getB ();
