@@ -2,10 +2,12 @@ cmake_minimum_required(VERSION 3.2)
 find_package(GTest)
 find_package(Threads REQUIRED)
 
+set(TestName "UnitTests")
+
 if(NOT GTEST_FOUND)
   message(FATAL_ERROR "Google Test was not found!")
 else()
-  message("-- Starting tests!")
+  message("-- Testing activated!")
 endif()
 
 include_directories(${GTEST_INCLUDE_DIRS})
@@ -18,7 +20,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage") # enabling coverage
 
 file (GLOB_RECURSE SRC_TESTS "*.cpp")
 
-# Because of global globbing, the program main routine has to be removed from the tests objects
+# Because of global globbing, the program main routine has to be removed from the ${TestName}s objects
 set(PROGRAM_SRC ${SRC})
 get_filename_component(full_path_main ${CMAKE_SOURCE_DIR}/src/main.cpp ABSOLUTE)
 
@@ -27,16 +29,18 @@ list(REMOVE_ITEM PROGRAM_SRC "${full_path_main}")
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(tests ${SRC_TESTS} ${PROGRAM_SRC})
-set_target_properties(tests PROPERTIES LINKER_LANGUAGE CXX)
+add_executable(${TestName} ${SRC_TESTS} ${PROGRAM_SRC})
+set_target_properties(${TestName} PROPERTIES LINKER_LANGUAGE CXX)
 
-target_link_libraries(tests ${GTEST_BOTH_LIBRARIES})
-target_link_libraries(tests ${GMOCK_LIBRARIES})
-target_link_libraries(tests ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(${TestName} ${GTEST_BOTH_LIBRARIES})
+target_link_libraries(${TestName} ${GMOCK_LIBRARIES})
+target_link_libraries(${TestName} ${CMAKE_THREAD_LIBS_INIT})
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../inc/)
-target_link_libraries(tests --coverage)
-target_link_libraries(tests testmath)
-add_test(AllTests tests)
+target_link_libraries(${TestName} --coverage)
+target_link_libraries(${TestName} testmath)
+add_test(AllTests ${TestName})
+
+add_custom_target(gtest COMMAND ./${TestName})
 
