@@ -21,12 +21,14 @@ file (GLOB_RECURSE SRC_TESTS "*.cpp")
 # Because of global globbing, the program main routine has to be removed from the tests objects
 set(PROGRAM_SRC ${SRC})
 get_filename_component(full_path_main ${CMAKE_SOURCE_DIR}/src/main.cpp ABSOLUTE)
+
 list(REMOVE_ITEM PROGRAM_SRC "${full_path_main}")
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(tests ${SRC_TESTS} ${PROGRAM_SRC})
+set_target_properties(tests PROPERTIES LINKER_LANGUAGE CXX)
 
 target_link_libraries(tests ${GTEST_BOTH_LIBRARIES})
 target_link_libraries(tests ${GMOCK_LIBRARIES})

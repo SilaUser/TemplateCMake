@@ -2,17 +2,21 @@ cmake_minimum_required (VERSION 3.2)
 
 project (TestCMake)
 
-file (GLOB_RECURSE SRC "src/*.cpp")
-file (GLOB_RECURSE INC "inc/*.h")
+set(CMAKE_BUILD_TYPE Debug)
+
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 include_directories ("inc")
 
+add_subdirectory(inc)
+add_subdirectory(src)
+
 if (MSVC)
-  add_compile_options(/W4)
+	message("Testing currently disabled for MSVC!")
 else()
   include(CTest)
   enable_testing()
-  set(CMAKE_CXX_COMPILER "g++")
-  add_compile_options (-Wall -Wextra -Wpedantic)
   add_subdirectory(test)
 endif()
 
@@ -24,11 +28,4 @@ if (CMAKE_COMPILER_IS_GNUCC)
   endif()
 endif()
 
-set(CMAKE_BUILD_TYPE Debug)
-
-set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-add_executable(${PROJECT_NAME} ${SRC})
-target_link_libraries(${PROJECT_NAME} --coverage)
 

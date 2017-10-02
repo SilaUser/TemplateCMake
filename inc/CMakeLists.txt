@@ -1,0 +1,2 @@
+file (GLOB_RECURSE INCS "*.cpp")
+set (INC ${INCS} PARENT_SCOPE)
