@@ -1,11 +1,18 @@
 ﻿---
+AlignConsecutiveAssignments: 'true'
+AlignConsecutiveDeclarations: 'true'
+AllowShortBlocksOnASingleLine: 'false'
+AllowShortCaseLabelsOnASingleLine: 'false'
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: 'false'
 AllowShortLoopsOnASingleLine: 'false'
 AlwaysBreakTemplateDeclarations: 'true'
 BreakBeforeBraces: Allman
 IndentWidth: '4'
 Language: Cpp
+SpaceAfterCStyleCast: 'true'
 SpaceBeforeAssignmentOperators: 'true'
-SpaceBeforeParens: Always
+SpaceBeforeParens: ControlStatements
 SpaceInEmptyParentheses: 'false'
 SpacesInAngles: 'false'
 Standard: Cpp11
