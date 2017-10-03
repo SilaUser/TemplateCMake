@@ -18,7 +18,7 @@ auto main () -> int
     }
     std::cout << "\n";
 
-	TestClass g;
+    TestClass g;
     std::cout << g.getA () << "\n";
     std::cout << g.getB () << "\n";
 }

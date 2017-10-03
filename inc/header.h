@@ -1,4 +1,4 @@
-int add(int a, int b);
+int add (int a, int b);
 
 class TestClass
 {
@@ -6,7 +6,7 @@ class TestClass
     double b;
 
   public:
-	TestClass () : a{1}, b{2} {}
+    TestClass () : a{1}, b{2} {}
 
     int getA ();
     double getB ();
